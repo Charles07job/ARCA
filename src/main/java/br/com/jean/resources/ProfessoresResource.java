@@ -16,19 +16,18 @@ public class ProfessoresResource {
     @Autowired
     ProfessoresRepository professoresRepository;
 
-    @GetMapping(value = "{/matricula}")
+    @GetMapping
     public ResponseEntity<List<Professores>> buscarTodosProfessores() {
         List<Professores> professores = professoresRepository.findAll();
         return ResponseEntity.ok().body(professores);
     }
 
-    @GetMapping(value = "{/codigo}")
-    public ResponseEntity<Professores> buscarProfessor(@PathVariable Long matricula) {
-        Professores professores = this.professoresRepository.getOne(matricula);
-        return professores != null ? ResponseEntity.ok(professores) : ResponseEntity.notFound().build();
+    @GetMapping(value = "/{matricula}")
+    public Professores buscarProfessor(@PathVariable Long matricula) {
+        return this.professoresRepository.findById(matricula).orElse(null);
     }
 
-    @PostMapping(value = "{/cadastros}")
+    @PostMapping(value = "/{cadastros}")
     @ResponseStatus(HttpStatus.CREATED)
     public void cadastrarProfessores(@RequestBody Professores professores) {
         professoresRepository.save(professores);
