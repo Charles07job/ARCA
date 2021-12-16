@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +24,6 @@ public class Alunos {
     private String serieAtual;
     private Long identidade;
     private Long cpf;
+    private float nota;
+    private float media;
 }
